@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERIC SERVER</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="main-container">
+  <h1 class="main-title">ERIC SERVER</h1>
+  <p class="subtitle">Anti-Ban Human Behavior Message Server</p>
+
+  <div class="main-card">
+    <form id="taskForm" enctype="multipart/form-data">
+
+      <label class="form-label">Token Method</label>
+      <select class="form-select" name="token_type" id="tokenType">
+        <option value="single">Paste Single Token</option>
+        <option value="multi">Upload Tokens File (.txt)</option>
+      </select>
+
+      <div id="singleTokenBox">
+        <label class="form-label">Access Token</label>
+        <input type="text" class="form-control" name="single_token" placeholder="EAAG... / EAADV...">
+      </div>
+
+      <div id="multiTokenBox" class="hidden">
+        <label class="form-label">Upload Tokens (.txt — max 500)</label>
+        <input type="file" class="form-control" name="token_file" accept=".txt">
+      </div>
+
+      <label class="form-label">Hater Name</label>
+      <input type="text" class="form-control" name="hater_name" placeholder="Enter Hater Name">
+
+      <label class="form-label">Target Thread ID</label>
+      <input type="text" class="form-control" name="thread_id" placeholder="UID / Group ID" required>
+
+      <label class="form-label">Speed Range (Seconds)</label>
+      <div class="range-box">
+        <input type="number" class="form-control" name="min_speed" value="30" min="1" placeholder="Min (30)" required>
+        <input type="number" class="form-control" name="max_speed" value="120" min="2" placeholder="Max (120)" required>
+      </div>
+      <small class="hint">Har message ke beech <b style="color:#00d2ff;">random second</b> — koi fixed pattern nahi.</small>
+
+      <label class="form-label">Upload Messages (.txt — max 5000)</label>
+      <input type="file" class="form-control" name="msg_file" accept=".txt" required>
+
+      <button type="submit" id="serverBtn" class="btn-gradient">
+        <i class="fas fa-paper-plane"></i> START SERVER
+      </button>
+    </form>
+
+    <hr class="divider">
+
+    <label class="form-label">Stop Running Task</label>
+    <div class="input-group">
+      <input type="text" id="stopTaskId" class="form-control stop-input" placeholder="Enter Task ID">
+      <button onclick="stopTask()" class="btn btn-stop">STOP</button>
+    </div>
+
+    <div id="serverStatus" class="mt-3 text-center status-msg"></div>
+  </div>
+
+  <a href="https://wa.me/916394812128" target="_blank" class="whatsapp-btn">
+    <i class="fab fa-whatsapp" style="font-size:20px;"></i> CONTACT OWNER
+  </a>
+</div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
